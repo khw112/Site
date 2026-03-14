@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulary Quiz</title>
+<style>
+body{font-family:Arial, sans-serif;background:#f4f6fb;margin:0;padding:20px}
+.container{max-width:900px;margin:auto;background:white;padding:25px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+h1{text-align:center}
+.question{margin:20px 0}
+.options label{display:block;margin:5px 0;padding:8px;border-radius:6px;cursor:pointer}
+.options label:hover{background:#eef2ff}
+button{margin-top:20px;padding:10px 20px;font-size:16px;border:none;border-radius:6px;background:#4f46e5;color:white;cursor:pointer}
+.result{font-size:20px;margin-top:20px;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Vocabulary Multiple Choice Quiz</h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<div class="result" id="result"></div>
+</div>
+
+<script>
+const questions=[
+{q:"1. The area is famous for its natural beauty and ...... significance",o:["cultural","culturally","culture","cultures"],a:0},
+{q:"2. These products are called lacquer ware because they are .... covered with lacquer",o:["decoration","decorated","decorative","decoratively"],a:1},
+{q:"3. Heritage sites and artifacts are often ....",o:["replaceable","irreplaceably","irreplaceable","replace"],a:2},
+{q:"4. Many ancient houses are not .... because of weather",o:["well-done","well-known","well-preserved","well-prepared"],a:2},
+{q:"5. It is a .... complex that comprises royal palaces",o:["culturally","culture","cultural","cultures"],a:2},
+{q:"6. We should .... awareness of young people",o:["educate","raise","take","recognize"],a:1},
+{q:"7. Specialized .... courses such as design",o:["vocate","vocation","vocational","vocationally"],a:2},
+{q:"8. He left school with few .... qualifications",o:["academic","academy","academician","academically"],a:0},
+{q:"9. It's my .... ceremony next week",o:["graduation","graduate","graduating","graduates"],a:0},
+{q:"10. Students are offered four‑month ....",o:["education","apprenticeships","courses","break"],a:1},
+{q:"11. Oxford is one of the best academic ....",o:["chances","careers","institutions","companies"],a:2},
+{q:"12. He didn't have the right ....",o:["qualifications","trades","apprentice","skilled people"],a:0},
+{q:"13. He completed a .... cooking course",o:["business","professional","formal","responsible"],a:1},
+{q:"14. We collected a lot of .... from institutions",o:["answers","questions","brochures","donations"],a:2},
+{q:"15. Despite difficulties, my parents .... to pay",o:["disagreed","approved","refused","managed"],a:3},
+{q:"16. There are a lot of .... opportunities",o:["educator","educate","education","educational"],a:3},
+{q:"17. Hard to get a job without .... qualifications",o:["academic","social","great","favourite"],a:0},
+{q:"18. Their son is .... at home",o:["dependent","independent","educational","independence"],a:1},
+{q:"19. Review the advantages and ....",o:["disadvantageous","advantageous","disadvantageously","disadvantages"],a:3},
+{q:"20. Children are highly ....",o:["self-motivated","self-confident","self-studying","self-teaching"],a:0},
+{q:"21. You should .... your clothes into white and colours",o:["manage","keep","separate","load"],a:2}
+];
+
+const form=document.getElementById("quizForm");
+
+questions.forEach((item,i)=>{
+let div=document.createElement("div");
+div.className="question";
+let html=`<p>${item.q}</p><div class="options">`;
+item.o.forEach((opt,j)=>{
+html+=`<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`;
+});
+html+="</div>";
+div.innerHTML=html;
+form.appendChild(div);
+});
+
+function submitQuiz(){
+let score=0;
+questions.forEach((q,i)=>{
+let ans=document.querySelector(`input[name=q${i}]:checked`);
+if(ans && Number(ans.value)===q.a) score++;
+});
+
+document.getElementById("result").innerText="Your score: "+score+" / "+questions.length;
+}
+</script>
+</body>
+</html>
